@@ -18,16 +18,16 @@ RUN mkdir -p /root/.ssh \
 && echo "	email = chauhanx.ritesh@gmail.com" >> /home/go/.gitconfig \
 && echo "	name = Ritesh" >> /home/go/.gitconfig \
 # Add repositories 
-&& apt update && apt -y dist-upgrade \
-&& apt install -y apt-utils software-properties-common \
+&& apt-get update && apt -y dist-upgrade \
+&& apt-get install -y apt-utils software-properties-common \
 && apt-add-repository universe \
 && apt-add-repository multiverse \
 && apt update \
 # Set Locale
-&& apt install -y language-pack-en-base \
+&& apt-get install -y language-pack-en-base \
 && locale-gen en_US en_US.UTF-8 \
 && dpkg-reconfigure locales \
-&& apt install -y \
+&& apt-get install -y \
 autoconf \
 automake \
 autotools-dev \
@@ -61,19 +61,21 @@ vim \
 && echo 'export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH' >> /root/.profile \
 && go version \
 
-&& apt clean \
-&& apt autoclean \
-&& apt -y autoremove
+&& apt-get clean \
+&& apt-get autoclean \
+&& apt-get -y autoremove
 
 ADD .vimrc /root
 
 # install the pathogen 
 RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \ 
-    curl -LkSso ~/.vim/autoload/pathogen.vim https://to.pe/pathogen.vim 
+    curl -LkSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim 
 
-RUN git config --global http.sslVerify false && git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
+RUN git config --global http.sslVerify false && \ 
+    git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-goi && \
+    git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
 
 RUN mkdir -p ~/.vim/colors && curl -Gk https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -o ~/.vim/colors/monokai.vim
 
-
+RUN rm /go1.16.6.linux-amd64.tar.gz
 
