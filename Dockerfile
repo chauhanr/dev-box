@@ -64,3 +64,16 @@ vim \
 && apt clean \
 && apt autoclean \
 && apt -y autoremove
+
+ADD .vimrc /root
+
+# install the pathogen 
+RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \ 
+    curl -LkSso ~/.vim/autoload/pathogen.vim https://to.pe/pathogen.vim 
+
+RUN git config --global http.sslVerify false && git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
+
+RUN mkdir -p ~/.vim/colors && curl -Gk https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -o ~/.vim/colors/monokai.vim
+
+
+
